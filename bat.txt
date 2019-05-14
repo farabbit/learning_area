@@ -1,0 +1,42 @@
+﻿内部命令		echo, cls, del, dir
+外部命令		created by new applicaiton programes
+
+命令行命令
+	echo		display
+	echo on/off	do not display command line itself always
+	pause		press any key to continue
+	%[1-9]		访问参数列表
+	:, goto		label, goto the label
+	del		delete
+	call		call other batch
+	find		
+	for
+	set
+	shift
+操作符
+	! ~ -		单目运算符
+	+-*/%		算术运算符
+	<< >> < >	逻辑移位/重定向
+	& | ^		与/组合 或/管道 异或/转义
+	= ...
+	&& ||		组合命令
+	：： / rem	note
+	@		do not display command line itself this line
+	|		管道
+
+
+%ERRORLEVEL%	系统变量，上一条代码的执行结果0，1，2，4，5
+if [not] 参数 == 字符串 COMMAND1 [else COMMAND2]
+if [not] exist 文件名 待执行命令	[else COMMAND2]
+if errorlevel <数字> 待执行命令
+
+BAT文件如何注释
+1.BAT文件中如何注释:
+1、:: 注释内容（第一个冒号后也可以跟任何一个非字母数字的字符）
+2、rem 注释内容（不能出现重定向符号和管道符号）
+3、echo 注释内容（不能出现重定向符号和管道符号）〉nul
+4、if not exist nul 注释内容（不能出现重定向符号和管道符号）
+5、:注释内容（注释文本不能与已有标签重名）
+6、%注释内容%（可以用作行间注释，不能出现重定向符号和管道符号）
+7、goto 标签 注释内容（可以用作说明goto的条件和执行内容）
+8、:标签 注释内容（可以用作标签下方段的执行内容）

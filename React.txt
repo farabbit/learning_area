@@ -1,0 +1,10 @@
+WHY REACT?
+	js lib developed by Facebook
+	fast
+	modular
+	scalable
+	flexible
+	popular
+
+JSX
+	

@@ -1,0 +1,269 @@
+﻿HTML + VBS
+	<script type="text/vbsript">...</script>
+
+variables
+	Dim
+	Public
+	Private
+
+Array -> Dim names(2)
+
+------------------------------------------------------------------------
+
+sub procedure
+	Sub subname(Vars)
+		Body
+	End Sub
+
+sub function
+	Function FuncName(Vars)
+		Body
+		FuncName=ReturnValue -------> This is how VBS returns
+	End Function
+
+Call a function
+	Call FuncName(Vars)
+	or
+	FuncName Vars
+
+-----------------------------------------------------------------------
+
+EndIf -> add this when more than two phrase
+If ... End If
+If ... Then ... (Else ... ) EndIf
+IF ... THen ... ElseIf ... ( ElseIf ... ) Else ... EndIf
+Select Case
+	Select Case Var1
+	Case 1
+		...
+	Case 2
+		...
+	Case else
+		...
+	End Select
+
+Loop
+For ... Next
+	For i=.. To .. (Step ..)
+	(If i=.. Then Exit For)
+	Next
+For Each ... Next -> operate with array
+	For Each .. in ..
+		Body
+	Next
+
+Do ... Loop
+	Do While xx>xx ... Loop
+	Do until xx=xx ... loop
+	Do ... Loop while xx>xx
+
+While ... Wend
+
+------------------------------------------------------------------------
+
+utility functions
+
+asc(s)	chr(23)
+
+cbool()
+cByte()
+cCur()		cunrrency
+cdate()
+cdble()		double
+cint()
+cLng()		long
+csng()		single
+cstr()
+
+isArray()
+isDate()
+isEmpty
+isNumeric()
+isNull()
+isObject()
+
+len()
+
+split(expression[, delimiter[, count[, start]]])
+	delimiter	子字符串界限
+	count		返回子字符串数目 -> -1返回所有
+	compare		比较类型 => 0 二进制比较， 1 文本比较
+
+left(string, length) right(string, length)
+Instr(start[optional], str1, str2)
+Lcase(str)	UCase(str)
+Date	Time	Now
+day(date)	month(date)	year(date)	hour(time)	minute(time)	second(time)
+
+formatDateTime(date[, namedFormat])
+
+DateAdd(interval, number, date)
+	interval	string -> yyyy q m y d w ww h n s
+	number		how many interval
+	date		Variant or date
+
+
+-----------------------------------------------------------------------
+
+
+RegularExpression
+RegExp -----> set re = new RegExp
+	3 properties
+		.Gobal 		-> bool, every match or first match
+		.IgnoreCase 	-> bool
+		.Pattern 	-> regular expression
+	3 methods
+		.execute() -> matches set
+		.replace ...
+		.test -> bool
+
+------------------------------------------------------------------------
+
+File Operations
+
+CreateObject -> every Com object in windows
+WSH
+	FSO -> Scripting.FileSystemObject -> file system opertion
+	Scripting.Dictionary -> Dictionary
+	Wscript.Shell -> r/w system information
+	Wscript.NetWork -> Network/Printer managment
+FSO -> FileSystemObject
+	objects
+		Drive/Drives
+		File/Files
+		FOlder/Folders
+		Textstream -> r/w files
+	HOW
+		1. CreateObject
+		2. Use Methods
+		3. Use properties
+	create
+		set fs = createobject("scripting.fileSystemObject")
+
+------------------------------------------------------------------------
+
+set fs = createobject("scripting.fileSystemObject")
+
+driver
+	exist	 	-> fs.driveExists("c:\")
+	get obj		-> set drive = fs.getDrive("c:")
+	driverSpace	-> msgbox(drive.availableSpace / 1024 / 1024 / 1024 ) & " GB")
+	       drive.freeSpace
+	       drive.totalSize
+Folder
+	exist		-> fs.folderExists("c:\test")
+	create		-> set fs.createFolder("c:\test")
+	get		-> set folder = fs.getFolder("c:\test")
+	move		-> fs.moveFolder "c:\test1" "c:\test2"
+			-> folder.move("c:\test")
+	copy		-> fs.copyFolder ...
+			-> folder.copy ...
+	delete		-> fs.deleteFolder("c:\test")
+			-> folder.delete()
+	properties
+		.name
+		.path
+		.size
+		.files
+			.files.count
+		.subfolders
+			.subfolders.count
+		.parentFolder
+
+*File
+	exist 		-> ...
+	get		-> set file = fs.getfile ...
+	open(only read)	-> set file = fs.openTextFile("filename", 1, false)
+	file name	-> fs.getfilename ...
+			-> file.name
+	extension name	-> fs.getExtensionName ...
+	copy		-> fs.copyfile ...
+			-> file.copy ...
+	delete		-> fs.deleteFile ...
+			-> file.delete()	
+	create		-> fs.createTextFile ...
+
+
+	properties & methods
+		.path
+		.name		
+		.size
+
+		.move ...
+		.copy ...
+		.delete()
+File r/w
+	get		-> fs.getFile ...
+	open r only	-> fs.openTextFile("filename", 1, false)
+	open w		-> fs.openTextFile("filename", 2, true)
+	open a		-> fs.openTextFile("filename", 8, trie)
+
+
+	isReadToLineEnd	-> file.atendOfLine
+	isReadToFileEnd	-> file.atendOfStream
+
+	read char	-> file.read(5)
+			-> file.readline()
+	column of p	-> file.column
+	line of p	-> file.line
+
+	skip		-> file.skip(5)
+			-> file.skipLine()
+
+	write		-> file.write ...
+			-> file.writeLine ...
+			-> file.writeBlankLines ...
+
+	close		-> file.close() -> set fs.nothing
+
+
+Raise Error
+
+with -> 用来对指定的对象执行一系列的语句，但不需要重复地说明对象的名称
+
+vbCrLf -> CONST new line
+
+
+UBound/LBound(array[, dimension]) -> 数组上下边界
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
