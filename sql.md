@@ -1,13 +1,11 @@
-﻿### problems
+### problems
 
-fetch
-cursor
-as
-is
+fetch  
+cursor  
+as  
+is  
 procedure
-
-
-
+  
 ### Procedure
 
 **structure**
@@ -27,6 +25,7 @@ execute proc_name ['value'|@parameter='value']
 drop procedure proc_name
 ```
 
+  
 ### Join
 ```
 SELECT Table1.column1, Table2.column2
@@ -39,6 +38,7 @@ SELECT Table1.column1, Table2.column2
 #### Right Join
 #### full join
 
+  
 ### Transactions
 **四大原则 ACID**
 > 原子性
