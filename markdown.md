@@ -1,82 +1,72 @@
 # markdown
 
-##title
-### # or =/-
+###title
+#### # or =/-
 
-#### title h4
 ##### title h5
 ###### title h6
 
-title h1
-==========
-title h2
-----------
-
-#### title h4 ####
-##### title h5 #####
-###### title h6 ######
-
-
-## unordered list
-### */+/-
+### unordered list
+#### */+/-
 
 * 1
 * 2
 * 3
 
 
-## ordered list
-### [int].
+### ordered list
+#### [int].
 
 1. listItem 1
 2. listItem 2
 3. listItem 3
 
 
-## quotation
-### use >
+### quotation
+#### use >
 
 this is not quotation
 > this is layer 1 quotation
 >> this is layer 2 quotation
 
 
-## seperator
-### */-/_ (at least 3)
+### seperator
+#### */-/_ (at least 3)
 
 
-## link
-### inline link
+### link
+#### inline link
 > [link 1](url)
-### parameter link
+#### parameter link
 > [link 2]: url "title 2"
 > here linked [link2]
 
 
-## image
-### same as link but add ! before [square bracket]
+### image
+#### same as link but add ! before [square bracket]
 ![baidu](www.baidu.com/img/bd_logo1.png)
 
 
-## code
-### backquote ` or ```
+### code
+#### backquote ` or ```
 ` code here `
 ``` multipleline
 code
-here ```
+here 
+```
 
-## emphasize
-### */_ or **/__
+#### emphasize
+##### */_ or **/__
 *italics*
 **strong**
 
 
-## escape character
-### backslash \
+### escape character
+#### backslash \
 \* <- here is a star
 
-## delete line
-### with two ~~ suround
+### delete line
+#### with two ~~ suround
 ~~message~~
 
 
