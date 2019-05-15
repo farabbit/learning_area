@@ -55,8 +55,8 @@ code
 here 
 ```
 
-#### emphasize
-##### */_ or **/__
+#### emphasize 强调
+##### */_ 斜体 or **/__ 加粗
 *italics*
 **strong**
 

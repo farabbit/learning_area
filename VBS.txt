@@ -226,7 +226,11 @@ vbCrLf -> CONST new line
 
 UBound/LBound(array[, dimension]) -> 数组上下边界
 
+--------------------------------------------------------------------------------
 
+CDO.Message
+
+this page --> https://www.jb51.net/article/26105.htm
 
 
 
