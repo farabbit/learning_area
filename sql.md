@@ -34,9 +34,9 @@ SELECT Table1.column1, Table2.column2
 	[] JOIN Table2
 	ON Table1.id == Table2.id
 ```
-> Inner Join
-> Left Join
-> Right Join
+> Inner Join  
+> Left Join  
+> Right Join  
 > full join
 <br/>
 
