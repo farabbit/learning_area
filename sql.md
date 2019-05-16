@@ -1,14 +1,4 @@
-﻿### problems
-
-fetch
-cursor
-as
-is
-procedure
-<br/>
-
-
-### Procedure
+﻿### Procedure
 
 **structure**
 ```
@@ -49,10 +39,10 @@ SELECT Table1.column1, Table2.column2
 > 持久性
 
 **Controls**
-> commit
-> rollback
-> savepoint		create savepoint
-> set transaction	???
+> commit  
+> rollback  
+> savepoint		create savepoint  
+> set transaction	???  
 <br/>
 
 
@@ -68,15 +58,15 @@ SELECT Table1.column1, Table2.column2
 ### Cursor
 ##### a memory workspace that save temprory data blocks from database
 **type**
-> 隐式Cursor
-> 显式Cursor
-> Ref Cursor (Dynamic Cursor)
+> 隐式Cursor  
+> 显式Cursor  
+> Ref Cursor (Dynamic Cursor)  
 
 **隐式Cursor**
 Select Into / Update / Insert / Delete -> these only get one data from db at one time
-> SQL%ROWCOUNT			Int
-> SQL%FOUND | SQL%NOTFOUNT	Bool
-> SQL%ISOPEN			Bool
+> SQL%ROWCOUNT			Int  
+> SQL%FOUND | SQL%NOTFOUNT	Bool  
+> SQL%ISOPEN			Bool  
 sample here
 ```
 Set Serveroutput on;
@@ -98,15 +88,15 @@ end;
 
 **显式Cursor**
 Properties
-> %ROWCOUNT		Int
-> %FOUND | %NOTFOUND	Bool
-> %ISOPEN		Bool
+> %ROWCOUNT		Int  
+> %FOUND | %NOTFOUND	Bool  
+> %ISOPEN		Bool  
 
 How to use -> four steps
-> define	Cursor [CursorName] IS;
-> open		Open [CursorName];
-> manipulate	Fetch [CursorName];
-> close		Close [CursorName]; -- DO NOT FOGOT THIS STEP
+> define	Cursor [CursorName] IS;  
+> open		Open [CursorName];  
+> manipulate	Fetch [CursorName];  
+> close		Close [CursorName]; -- DO NOT FOGOT THIS STEP  
 <br/>
 
 **Ref Cursor**
@@ -126,8 +116,8 @@ GRANT <permission> ON TABLE tableName[(columnName)] TO <username> [WITH GRANT OP
 or
 GRANT <permission> ON <dataObject> FROM <username>
 ```
-> dataObject -> column name or row name
-> permission means operations to db -> select, update ```
+> dataObject -> column name or row name  
+> permission means operations to db -> select, update
 ##### Revoke: 撤销，废除，取消
 **structure**
 ```
