@@ -46,6 +46,8 @@ ApplicationContext context = new ClassPathXmlApplicationContext("applicationCont
 testBean test = (testBean) context.getBean("testBean")
 test.display();
 ```
+<br/>
+
 2. **静态工厂**
 创建静态工厂类 testBeanStaticFactory
 > 实现 public static testBean getInstance(){ return new testBean; }  
@@ -57,6 +59,8 @@ ApplicationContext context = new ClassPathXmlApplicationContex("applicationConte
 testBean staticFactory = (testBean) context.getBean("testBeanStaticFactory");
 staticFactory.display();
 ```
+<br/>
+
 3. **实例工厂**
 创建实例工厂类 testBeanInstanceFactory
 > 实现 public testBean getInstance(){ return new testBean; }  
