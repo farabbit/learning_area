@@ -314,29 +314,4 @@ Spring模块
 或者通过XML启用  
 ```xml
 <context:component-scan base-package="packageName"/>
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-1p = 250ls
-1p = 250ce
-
-1DAY = 120*250 = 30000 = 2LV
-
-72min = 500ce
-180min = 1000ls
-
-1day = 24*60min = 1440min = 8000ls/z
-16000ls + 20000ce
-
-66000ls
+```=
