@@ -14,9 +14,8 @@ J2EE?
 > 没有业务逻辑 ~ value object | Data transfer object ~ JavaBean  
 
 **what can spring do**
-> 根据配置文件 创建、组装对象间依赖关系  
-> 面向切片编程  
->> 无耦合实现 日志记录，性能统计，安全控制  
+> 根据配置文件, 创建、组装对象间依赖关系  
+> 面向切片编程 -> 无耦合实现 日志记录，性能统计，安全控制  
 > 管理数据库事务  
 > 第三方数据访问框架 - Hibernate, JPA - 提供了JDBC访问模板  
 > 无缝集成第三方Web框架 - 且提供了Spring MVC  
@@ -37,9 +36,11 @@ DI = Dependency Injection 依赖注入
 ### 创建对象的方式
 先创建测试类 -> testBean
 1. **用默认构造方法**
-/src -> applicationContext.xml => spring配置文件
-> <bean id="testBean", class="classPath"></bean>
+/src -> applicationContext.xml => spring配置文件  
+```
+<bean id="testBean", class="classPath"></bean>
 <alias name="testBean" alias="testAlias" />  
+```
 使用  
 ```
 ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml")
@@ -75,14 +76,16 @@ applicationContext.xml
 *TODO*
 <br/>
 
-### bean中scop
+### bean中scope
 singleton/prototype/request/session/global session  
 *TODO*
 <br/>
 
 ### 生命周期
 applicationContext.xml
-> <bean id="springLifeCycle" init-method="init" destroy-method="destroy" class="com.ys.ioc.SpringLifeCycle"></bean>  
+```xml
+<bean id="springLifeCycle" init-method="init" destroy-method="destroy" class="com.ys.ioc.SpringLifeCycle"></bean>  
+```
 **life cycle**
 1. 创建对象
 2. init
@@ -96,36 +99,40 @@ Dependency Injection = 通过反射实现依赖注入（给属性赋值）
 创建实体类Person -> 有Student类的属性
 > 若干属性  
 > private Properties properties  
->> properties getter/setter
-在applicationContext.xml中赋值
-> <bean id="person" class="classPath+Name">  
->> <property name="pid" value="1"></property>
->> <property name="students">  
->>> <ref bean="student"/>  
->> </property>  
->> <property name="lists">  
->>> <list>  
->>>> <value>1</value>  
->>>> <ref bean="student"/>  
->>>> <value>vae</value>  
->>> </list>  
->> </property>  
-> </bean>  
-测试  
+>> properties getter/setter  
+在applicationContext.xml中赋值  
+```xml
+<bean id="person" class="classPath+Name">  
+  <property name="pid" value="1"></property>
+  <property name="students">  
+    <ref bean="student"/>  
+  </property>  
+  <property name="lists">  
+    <list>  
+      <value>1</value>  
+      <ref bean="student"/>  
+      <value>vae</value>  
+    </list>  
+  </property>  
+</bean>  
 ```
+测试  
+```java
 ApplicationContext contxt = ...
 Person person = (Person) context.getBean("person);
 System.out(person.getName());
 ```
 2. **利用构造函数赋值**
 创建实体类Person, 带参构造函数  
-> <bean id="person_con" class="com.ys.di.Person">  
->> <constructor-arg index="0" type="java.lang.Long" value="1"></constructor-arg>  
->> <constructor-arg index="1" type="com.ys.di.Student" ref="student_con"></constructor-arg>  
-> </bean>  
-> <bean id="student_con" class="com.ys.di.Student"></bean>  
-测试  
+```xml
+<bean id="person_con" class="com.ys.di.Person">  
+  <constructor-arg index="0" type="java.lang.Long" value="1"></constructor-arg>  
+  <constructor-arg index="1" type="com.ys.di.Student" ref="student_con"></constructor-arg>  
+</bean>  
+<bean id="student_con" class="com.ys.di.Student"></bean>  
 ```
+测试  
+```java
 ApplicationContext context = ...
 Person person = (Person) context.getBean("person_con");
 System.out.println(person.getPid());
@@ -134,23 +141,45 @@ System.out.println(person.getPid());
 # Annotation
 > applicationContextt.xml中引入命名空间  
 > applicationContext.xml中引入注解扫描器  
->> <context:component-scan base-package="com.ys.annotation"></context:component-scan>  
+```xml
+<context:component-scan base-package="com.ys.annotation"></context:component-scan>
+```
 > Person 类中添加注解@Component  
 1. @Component
 2. @Repository, @Service, @Controller
-3. @Resource
-4. @Autowired
+> * @Repository -> dao层  
+> * @Servic -> service层  
+> * @Controller -> web层  
+3. @Resource，按照名称装配
+需要别的类作为属性时，需要加@Resource(name="xxx")
+4. @Autowired，按照类型装配
+*TODO*
 
 
 
 
 
 # Spring AOP 面向切片编程
-Aspect Oriented programming
+Aspect Oriented programming  
 **思想**
-功能分为
+解剖开封装对象的内部，将影响多个类的公共行封装到可重用模块，命名为Aspect=切面  
+功能分为  
 > 核心业务 登陆，增删改查  
 > 周边功能 性能统计，日志，事务管理 = 切面  
 两功能独立开发，切面+核心业务 = AOP  
 **目的**
 封装与业务无关。但为业务模块共同调用的逻辑、责任封装，去重减耦，增加扩展维护性
+
+### 代理模式
+提供对目标对象的间接访问方式  
+> 便于扩展目标对象功能  
+> 便于为多人所用
+```
+graph LR
+C[客户]|代理对象| <--> |访问目标| P[代理对象] |返回结果| <--> |访问目标| O[目标对象] 
+```
+
+1. **静态代理**
+*TODO*
+2. **JDK动态代理**
+*TODO*
