@@ -23,11 +23,11 @@ J2EE?
 > 方便与Java EE整合  
 
 ### Structure
-**Data Access/Integration层** -> JDBC, ORM, OXM, JMS, Transaction
-**Web层** -> Web, Web-Servlet, WebSocket, Web-Porlet
-**AOP层** -> 符合AOP联盟便准的面向切片编程实现
+**Data Access/Integration层** -> JDBC, ORM, OXM, JMS, Transaction  
+**Web层** -> Web, Web-Servlet, WebSocket, Web-Porlet  
+**AOP层** -> 符合AOP联盟便准的面向切片编程实现  
 **Core Container** -> Beans, Core, Context, SpEL
-**Test模块** -> JUnit, TestNG
+**Test模块** -> JUnit, TestNG  
 
 # Spring IoC, DI
 IoC = Inverse of Control 控制反转
@@ -40,7 +40,7 @@ DI = Dependency Injection 依赖注入
 /src -> applicationContext.xml => spring配置文件
 > <bean id="testBean", class="classPath"></bean>
 <alias name="testBean" alias="testAlias" />  
-使用
+使用  
 ```
 ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml")
 testBean test = (testBean) context.getBean("testBean")
@@ -53,7 +53,7 @@ test.display();
 > 实现 public static testBean getInstance(){ return new testBean; }  
 applicationContext.xml
 > <bean id="testBeanStaticFactory" factory-method="getInstance" class="FactoryClassPath"></bean>  
-使用
+使用  
 ```
 ApplicationContext context = new ClassPathXmlApplicationContex("applicationContext.xml");
 testBean staticFactory = (testBean) context.getBean("testBeanStaticFactory");
@@ -62,9 +62,9 @@ staticFactory.display();
 <br/>
 
 3. **实例工厂**
-创建实例工厂类 testBeanInstanceFactory
+创建实例工厂类 testBeanInstanceFactory  
 > 实现 public testBean getInstance(){ return new testBean; }  
-applicationContext.xml
+applicationContext.xml  
 ```
 <bean id="instanceFactory" class="classPath+name"></bean>  
 <bean id="instance" factory-bean="instanceFactory" factory-method="getInstance"></bean>
@@ -76,7 +76,7 @@ applicationContext.xml
 <br/>
 
 ### bean中scop
-singleton/prototype/request/session/global session
+singleton/prototype/request/session/global session  
 *TODO*
 <br/>
 
@@ -91,7 +91,7 @@ applicationContext.xml
 <br/>
 
 # Spring DI 依赖注入
-Dependency Injection = 通过反射实现依赖注入（给属性赋值）
+Dependency Injection = 通过反射实现依赖注入（给属性赋值）  
 1. **利用set方法赋值**
 创建实体类Person -> 有Student类的属性
 > 若干属性  
@@ -110,23 +110,23 @@ Dependency Injection = 通过反射实现依赖注入（给属性赋值）
 >>>> <value>vae</value>  
 >>> </list>  
 >> </property>  
-> </bean>
-测试
+> </bean>  
+测试  
 ```
 ApplicationContext contxt = ...
 Person person = (Person) context.getBean("person);
 System.out(person.getName());
 ```
 2. **利用构造函数赋值**
-创建实体类Person, 带参构造函数
+创建实体类Person, 带参构造函数  
 > <bean id="person_con" class="com.ys.di.Person">  
 >> <constructor-arg index="0" type="java.lang.Long" value="1"></constructor-arg>  
 >> <constructor-arg index="1" type="com.ys.di.Student" ref="student_con"></constructor-arg>  
 > </bean>  
 > <bean id="student_con" class="com.ys.di.Student"></bean>  
-测试
+测试  
 ```
- ApplicationContext context = ...
+ApplicationContext context = ...
 Person person = (Person) context.getBean("person_con");
 System.out.println(person.getPid());
 ```
