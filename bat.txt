@@ -7,7 +7,7 @@
 	pause		press any key to continue
 	%[1-9]		访问参数列表
 	:, goto		label, goto the label
-	del		delete
+	del			delete
 	call		call other batch
 	find		
 	for

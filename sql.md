@@ -3,10 +3,10 @@
 **structure**
 ```
 CREATE PROCEDURE proc_name [(@parameter varchar(10)] [, @outPara varchar(10) output]
-	AS [???]
-	BEGIN
-		select * from sales.salesReason;
-	END
+  AS [settings]
+  BEGIN
+    select * from sales.salesReason;
+  END
 GO
 ```
 
@@ -20,11 +20,11 @@ drop procedure proc_name
 ### Join
 ```
 SELECT Table1.column1, Table2.column2
-	From Table1
-	[] JOIN Table2
-	ON Table1.id == Table2.id
+  From Table1
+  [] JOIN Table2
+  ON Table1.id == Table2.id
 ```
-> Inner Join  
+> Inner Join
 > Left Join  
 > Right Join  
 > full join
@@ -33,10 +33,22 @@ SELECT Table1.column1, Table2.column2
 
 ### Transactions
 **四大原则 ACID**
-> 原子性
-> 一致性
-> 隔离性
-> 持久性
+> 原子性 Atomic  
+> 一致性 Consistent  
+> 隔离性 Isolation  
+> 持久性 Duration
+###事务
+**数据不一致**
+脏读 Dirty read
+不可重复读 Non repeatable read
+幻读 Phamtom read
+
+**隔离级别**
+Read uncommitted
+Read committed
+Reapeatable read
+Serializable
+***TODO***
 
 **Controls**
 > commit  
@@ -49,7 +61,7 @@ SELECT Table1.column1, Table2.column2
 ### Begin, End, Go
 
 **Begin ... Exception ... End**
-> make several codes into a logical block
+> make several codes into a logical block  
 **Go** for T-SQL
 > tell SQLServer a set of code ends, execute those code and continue
 
@@ -124,8 +136,6 @@ GRANT <permission> ON <dataObject> FROM <username>
 REVOKE <permission> ON TABLE <tableName[(columnName)]> FROM <username> [CASCADE | RESTROCT]
 ```
 
+### 聚合查询 = COUNT, AVG, MAX, MIN + groupby
 
-
-
-
-
+### 多表查询
