@@ -1,4 +1,5 @@
 # markdown
+see this: https://sspai.com/post/45816
 
 ###title
 #### # or =/-
@@ -35,39 +36,61 @@ this is not quotation
 
 
 ### link
+
 #### inline link
+
 > [link 1](url)
+
 #### parameter link
+
 > [link 2]: url "title 2"
 > here linked [link2]
 
 
-### image
-#### same as link but add ! before [square bracket]
+### image -> same as link but add ! before [square bracket]
+
 ![baidu](www.baidu.com/img/bd_logo1.png)
 
 
-### code
-#### backquote ` or ```
-` code here `
-``` multipleline
+### code backquote ` or ```
+
+`code here`
+
+```key
+multipleline
 code
-here 
+here
 ```
 
-#### emphasize 强调
-##### */_ 斜体 or **/__ 加粗
-*italics*
-**strong**
+#### emphasize 强调 -> */_ 斜体 or **/__ 加粗 or == 高亮
+
+*italics*  
+**strong**  
+==highlight==  
 
 
-### escape character
-#### backslash \
+### escape character backslash \
+
 \* <- here is a star
 
-### delete line
-#### with two ~~ suround
+### delete line with two ~~ suround
+
 ~~message~~
 
+### 待办事项
+[ ] 未完成
+[x] 已完成
 
+### 流程图
 
+graph
+-->
+---
+```
+graph LR
+A --> B
+```
+
+### 甘特图
+
+*TODO*

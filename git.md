@@ -2,6 +2,7 @@
 > git只能跟踪文本文件的改动，二进制文件不行
 
 ## Repository 版本库
+
 **commands**
 basic
 > git init --> init a repository inside this dir
@@ -30,30 +31,41 @@ delete
 <br/>
 
 ## Remote repository 远程库
-##### How to use
+
+### How to use
+
 * Create SSH key
+
 > ssh-keygen -t rsa -c "email@example.com" -> write this in shell or Git bash to create a SSH key
 >> .ssh dir: id_rsa, id_rsa.pub
+
 * Add pub key to Github 
+
 > login GitHub -> Account setting -> SSH Keys -> Add -> paste id_rsa.pub
 
-##### Add remote repository
+### Add remote repository
+
 > GitHub -> Create new repo
 > as GitHub prumpt, entry command in cmd
 >> git remote add origin git@github.com:<GithubAccountName>/<repoName>.git
->>> origin is default remote repo name of git
+>>> origin is default remote repo name of git  
+
 > push local repo to remote repo
 >> git push -u origin master
->>> -u means git will relate both local and remote master branch together
+>>> -u means git will relate both local and remote master branch together  
+
 > any other modifications later
 >> git push origin master
 
-##### Clone from remote repository
+### Clone from remote repository
+
 > git clone git@github.com:<username>/<repoName>.git
 <>
 
 ## Branch management 分支管理
-##### Basic
+
+### Basic
+
 **with command: git branch**
 create & switch
 > git branch --> display all branches, * means current branch
@@ -78,7 +90,8 @@ delete
 
 禁用Fast forward时，git会在merge时生成新的commit
 --no-ff
-```
+
+```shell
 git checkout -b dev
 git add readme.txt
 git commit -m "add merge"
@@ -111,14 +124,16 @@ add a Feature branch when test your codes
 # git cheat sheet
 
 ## 一、常见命令
-1. 创建
+
+### 创建
+
 克隆现有的存储库
 
  $ git clone ssh://user@domain.com/repo.git
 创建新的本地存储库
 
  $ git init    
-2. 本地变化
+### 本地变化
 更改工作目录中的文件
 
  $ git status  
@@ -141,7 +156,7 @@ add a Feature branch when test your codes
 不要修改发布的提交！
 
  $ git commit --amend  
-3. 提交历史
+### 提交历史
 显示所有提交，从最新开始
 
  $ git log 
@@ -151,26 +166,29 @@ add a Feature branch when test your codes
 谁在< file >中更改了内容和时间？
 
   $ git blame <file>   
-4. 分支和标签
+
+### 分支和标签
+
 列出所有现有分支
+ $ git branch -av
 
- $ git branch -av  
 切换分支
+ $ git checkout <branch>  
 
- $ git checkout <branch>   
 根据当前的头部创建一个新分支
-
  $ git branch <new-branch> 
+
 基于远程分支创建新的跟踪分支
-
 $ git checkout --track <remote/bran- ch>
+
 删除本地分支
-
   $ git branch -d <branch> 
-提交标签
 
-  $ git tag <tag-name> 
-5. 更新和发布
+提交标签
+  $ git tag <tag-name>
+
+### 更新和发布
+
 列出所有当前配置的远程主机
 
  $ git remote -v   
@@ -195,28 +213,26 @@ $ git branch -dr <remote/branch>
 发布标签
 
 $ git push --tags
-6. 合并和重基
+1. 合并和重基
 将<分支>合并到当前的头部
-
   $ git merge <branch> 
+
 将当前的头重新定位到<分支> 
 不要重新发布已发布的提交！
-
   $ git rebase <branch>    
+
 中止重基
-
   $ git rebase --abort 
+
 解决冲突后继续重基
-
  $ git rebase --continue   
+
 使用配置的合并工具解决冲突
-
  $ git mergetool   
-使用编辑器手动解决冲突，并(在解决后)将文件标记为“已解决”。
 
+使用编辑器手动解决冲突，并(在解决后)将文件标
+记为“已解决”。
   $ git add <resolved-file>    
-
-
   $ git rm <resolved-file> 
 7. 撤销
 放弃工作目录中的所有本地更改。
@@ -284,3 +300,18 @@ $ git reset --keep <commit>
 获取命令行的帮助
 
   $ git help <command> 
+
+## internal sharing
+
+------------------------
+
+Local repository
+
+remote repository
+
+git config --global(local, system
+
+git cat-file -t
+  文件类型
+git cat-file -p
+  文件内容

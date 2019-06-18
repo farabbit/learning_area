@@ -152,7 +152,7 @@ driver
 	       drive.totalSize
 Folder
 	exist		-> fs.folderExists("c:\test")
-	create		-> set fs.createFolder("c:\test")
+	create		-> fs.createFolder("c:\test")
 	get		-> set folder = fs.getFolder("c:\test")
 	move		-> fs.moveFolder "c:\test1" "c:\test2"
 			-> folder.move("c:\test")
@@ -233,7 +233,13 @@ CDO.Message
 this page --> https://www.jb51.net/article/26105.htm
 
 
+错误处理
+TODO
 
+WSH
+Scripting.FileSystemObject
+Scripting.Dictionary
+Wscript.Shell
 
 
 

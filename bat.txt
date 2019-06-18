@@ -30,6 +30,12 @@ if [not] 参数 == 字符串 COMMAND1 [else COMMAND2]
 if [not] exist 文件名 待执行命令	[else COMMAND2]
 if errorlevel <数字> 待执行命令
 
+if "%1" == "" (
+	sentence 1
+) else (
+	sentence 2
+)
+
 BAT文件如何注释
 1.BAT文件中如何注释:
 1、:: 注释内容（第一个冒号后也可以跟任何一个非字母数字的字符）

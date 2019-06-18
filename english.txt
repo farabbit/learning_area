@@ -12,8 +12,12 @@ margin call	n	保证金追缴通知
 agile		adj	敏捷的
 agility		n	敏捷
 portfolio	n	文件夹，公文包
-
-
+diagonal	n	对角线
+enroll		v	注册、入会
+intricate	adj	错综复杂的
+intricacy	n	错综复杂的事物
+daunt		v	使胆怯
+site		v	使定位/落址
 
 
 

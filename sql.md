@@ -1,7 +1,18 @@
-﻿### Procedure
+﻿# sql
 
-**structure**
-```
+## utilities
+
+### select columns
+
+SELECT t.COLUMN_NAME FROM USER_TAB_COLUMNS t where t.TABLE_NAME='SENTRY_SETTLEMENTINSTRUCTION';
+
+## concepts
+
+### Procedure
+
+structure
+
+``` sql
 CREATE PROCEDURE proc_name [(@parameter varchar(10)] [, @outPara varchar(10) output]
   AS [settings]
   BEGIN
@@ -10,8 +21,9 @@ CREATE PROCEDURE proc_name [(@parameter varchar(10)] [, @outPara varchar(10) out
 GO
 ```
 
-**run & delete**
-```
+run & delete
+
+```sql
 execute proc_name ['value'|@parameter='value']
 
 drop procedure proc_name
