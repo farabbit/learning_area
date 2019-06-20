@@ -71,26 +71,25 @@ ApplicationContext context = new ClassPathXmlApplicationContex("applicationConte
 testBean staticFactory = (testBean) context.getBean("testBeanStaticFactory");  
 staticFactory.display();  
 ```  
-<br/>  
 
-3. **实例工厂**  
+1. **实例工厂**  
+
 创建实例工厂类 testBeanInstanceFactory  
 > 实现 public testBean getInstance(){ return new testBean; }  
 applicationContext.xml  
-```  
+
+```xml
 <bean id="instanceFactory" class="classPath+name"></bean>  
 <bean id="instance" factory-bean="instanceFactory" factory-method="getInstance"></bean>  
 ```  
-<br/>  
 
 ### 创建对象的时机  
 *TODO*  
-<br/>  
 
 ### bean中scope  
+
 singleton/prototype/request/session/global session  
 *TODO*  
-<br/>  
 
 ### 生命周期  
 applicationContext.xml  

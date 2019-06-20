@@ -1,6 +1,16 @@
 # python
 
-## oop
+## Util
+
+* globals(): dic => get class by classname
+
+```python
+product = globals()["Product"]("ProductName")
+```
+
+## OOP
+
+---
 
 ### static method & class method
 
@@ -16,11 +26,11 @@ class Animal:
 
 @staticmethod
 
-> 不需要用到self时可加，一般用于增加可读性，不需要cls参数
+> 不需要用到self时可加，用于增加可读性，不需要cls参数
 
 ### interitance
 
-```python
+```pythonv
 class Animal: pass
 class Dog(Animal): pass
 ```

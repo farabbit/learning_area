@@ -1,6 +1,8 @@
 # 设计模式 Design Patterns
 
-Also See: [Design Patterns Intro](https://www.oodesign.com/)
+> Also See: [Design Patterns Intro](https://www.oodesign.com/)
+
+> code: [PatternName].py
 
 resuable solutions to commonly occruing problems, started as best practice applied to similar problems encountered in different contexts.
 
@@ -65,4 +67,13 @@ pass
 
 ### 责任链模式 Chain of responsibility
 
-pass
+> Objects become part of the chain, **request is sent from one object to another** until one object handle it
+
+![Chain of Responsbility](https://www.oodesign.com/images/stories/chain%20of%20responsability%20implementation%20-%20uml%20class%20diagram.gif)
+
+structure
+
+* Handler
+* Concrete Handler
+
+TODO

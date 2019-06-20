@@ -1,0 +1,4 @@
+Ping request could not find host baidu.com. Please check the name and try again.
+Ping request could not find host https://baidu.com. Please check the name and try again.
+Ping request could not find host https://baidu.com. Please check the name and try again.
+Ping request could not find host https://baidu.com. Please check the name and try again.
