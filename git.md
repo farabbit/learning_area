@@ -1,6 +1,8 @@
 #### tips
 > git只能跟踪文本文件的改动，二进制文件不行
 
+==git==
+
 ## Repository 版本库
 
 **commands**
