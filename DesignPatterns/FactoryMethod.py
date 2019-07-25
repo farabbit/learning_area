@@ -23,7 +23,7 @@ class Product1Factory(Factory):
 class Product2Factory(Factory):
     @classmethod
     def newProduct(cls):
-        return Product2
+        return Product2()
 
 factoryType = "Product1Factory"
 fac = globals()[factoryType]()

@@ -11,7 +11,7 @@ class Request:
     def display(self):
         print(self.value)
 
-# base handler class, can be seem as 
+# base handler class, a handler is a kind of service that serves Request
 class Handler: # abstract handler
     @abc.abstractclassmethod
     def filter(cls, requestObj):
@@ -25,7 +25,6 @@ class Handler1(Handler): # concrate handler 1
     @classmethod
     def filter(cls, requestObj):
         pass
-
         return True
 
     @classmethod
@@ -33,11 +32,10 @@ class Handler1(Handler): # concrate handler 1
         if cls.filter(requestObj):
             requestObj.value += "\nHandled by handler 1"
 
-class Handler2(Handler): # concrate handler 1
+class Handler2(Handler): # concrate handler 2
     @classmethod
     def filter(cls, requestObj):
         pass
-
         return True
 
     @classmethod
@@ -45,7 +43,7 @@ class Handler2(Handler): # concrate handler 1
         if cls.filter(requestObj):
             requestObj.value += "\nHandled by handler 2"
 
-
+ # this is one solution, another solution is use succesor chain inside every handler class
 class HandlerChain:
     def __init__(self, requestObj):
         self.ChainOfResponsbility = [] # register chain
