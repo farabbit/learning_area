@@ -63,6 +63,17 @@ structure
 
 pass
 
+### 建造者模式 Builder
+
+![Builder](https://www.oodesign.com/images/creational/builder-pattern.png)
+
+* structure
+  * Product
+  * ConcreteBuilder
+  * Builder
+  * ConcreteBuilder
+  * Director
+
 ## 行为型模式 Behavior Patterns
 
 ### 责任链模式 Chain of responsibility
@@ -73,7 +84,10 @@ pass
 
 structure
 
-* Handler
+* Request
+* Handler << abstract >>
 * Concrete Handler
 
-TODO
+Be used when:
+
+> More than one object can handle a request, and the hanlder is unknow

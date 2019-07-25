@@ -1,7 +1,205 @@
-### Questions  
+# spring
+
 Java Bean?  
 J2EE?  
-面向切片编程?  
+面向切片编程?
+
+## w3school
+
+### framework
+
+![Spring Framework](https://7n.w3cschool.cn/attachments/image/wk/wkspring/arch1.png)
+
+* Core container
+  1. spring-core => 框架基础，包括IoC和DI
+  2. spring-beans => 提供BeanFactory，移除编码式单例，把配置和依赖从实际编码逻辑中解耦
+  3. spring-context => 建立在core与beans上，提供类似JNDI注册方式访问对象，继承Bean
+      > ApplicationContext是Context的焦点
+  4. spring-context-support => 提供第三方继承库到spring context的支持
+  5. spring-expression
+* Data Access/Integration
+  1. JDBC
+  2. ORM => 提供对流行对象关系映射API的集成
+      > 如JPA, JDO, Hibernate, 可与spring其他功能整合
+  3. OXM => 提供对OXM实现的支持
+      > 如JAXB, Castor, XML Beans, JiBX, XStream
+  4. JMS => 包含生产（produce）和消费（consume）消息的功能
+  5. Transactions事务 => 为实现特殊接口类及POJO支持编程式和声明式事务管理
+      > * 声明式：通过注解或配置由spring自动配置
+      > * 编程式：自己写beginTransaction(), commit(), rollback()等，粒度更细
+* Web
+  1. Web => 提供面向web的基本功能和面向web的应用上下文
+      > multipart文件上传、用Servlet监听器初始化IoC容器，以及HTTP客户端和Spring远程调用中web部分。
+  2. Web-MVC => 模块为web应用提供MVC和REST服务的实现
+      > Spring MVC可完全分离领域模型代码和web表单，且可与Spring框架的其它所有功能集成。
+  3. Web-Socket => 为WebSocket-based提供了支持，而且在web应用中提供C/S间通信的两种方式。
+  4. Web-Portlet => 提供用于Portlet环境的MVC实现，反映了spring-web-mvc的功能
+* 其他
+  1. AOP => 提供面向方面的实现
+      > 允许定义方法拦截器、切入点对代码解耦
+  2. Aspects => 提供与AspetJ的集成
+  3. Instrumentation
+  4. Messaging
+
+### IoC容器
+
+IoC控制反转：将new交由Spring容器
+
+容器创建、连接、配置、管理对象。Spring容器用DI来管理组成应用程序的组建：Spring Beans.
+
+* BeanFacotory容器
+  > 由org.springframework.beans.factory.BeanFactory接口定义。  
+  > BeanFactory或相关接口，如BeanFactoryAware，InitializingBean，DisposableBean在Spring中仍然存在具大量与 Spring 整合的第三方框架反向兼容性的目的。
+* ApplicationContext容器
+  > 由org.springframework.context.ApplicationContext定义  
+  > 包括BeanFactory所有功能
+
+#### BeanFactory
+
+对BeanFactory接口的实现：XmlBeanFactory
+资源宝贵的设备中一般用BeanFacotry，否则一般用ApplicationContext
+
+#### ApplicationContext
+
+BeanFacotry的子接口
+
+常用ApplicationContext接口实现
+
+* FileSystemXmlApplicationContext：从XML中加载bean。需要提供给构造器 XML 文件的完整路径。
+* ClassPathXmlApplicationContext：从XML。。中加载bean。不需要提供XML完整路径，只需配置 CLASSPATH环境变量，容器会从CLASSPATH中搜索bean配置文件。
+* WebXmlApplicationContext：容器会在web应用程序范围内加载在XML中已被定义的bean
+
+### Bean
+
+bean = 被实例化，组装，并通过Spring IoC容器所管理的对象
+由配置元数据(Meta-data)创建
+
+| property                 | description                                                                      |
+| :----------------------- | :------------------------------------------------------------------------------- |
+| class                    | 强制性的，指定用来创建bean的bean类。                                             |
+| name                     | 指定唯一bean标识符。在基于XML的配置元数据中，可用ID和/或name属性指定bean标识符。 |
+| scope                    | 指定由特定bean定义创建对象的作用域                                               |
+| lazy-initialization mode | 延迟初始化的bean, 告诉IoC容器在它第一次被请求时，而非启动时创建bean实例。        |
+| initialization (method)  | 在 bean 的所有必需的属性被容器设置之后，调用回调方法。                           |
+| destruction (method)     | 当包含该 bean 的容器被销毁时，使用回调方法。                                     |
+| constructor-arg          | 用来注入依赖关系                                                                 |
+| properties               | 用来注入依赖关系                                                                 |
+| autowiring mode          | 用来注入依赖关系                                                                 |
+
+配置元数据
+
+* XML
+* Anotation
+* Java
+
+#### Bean作用域
+
+| scope          | description                                                                                  |
+| :------------- | :------------------------------------------------------------------------------------------- |
+| singleton      | Bean以单例方式存在                                                                           |
+| prototype      | 每次从容器调用Bean时，都返回新实例，即每次调用getBean()时，相当于执行newXxxBean()            |
+| request        | 每次HTTP请求都会创建新Bean，该作用域仅适用于WebApplicationContext环境                        |
+| session        | 同一个HTTP Session共享一个Bean，不同Session使用不同的Bean，仅适用于WebApplicationContext环境 |
+| global-session | 一般用于Portlet应用环境，该域仅适用于WebApplicationContext环境                               |
+
+#### 生命周期
+
+* init
+  * JAVA: 实现org.springframework.beans.factory.InitializingBean并实现afterPropertiesSet()
+  * XML: init-method="method_name"
+* destroy
+  * JAVA: 实现org.springframework.beans.factory.DisposableBean并实现destroy()
+  * XML: destroy-method="method_name"
+
+#### 继承
+
+* parent="parent_name"
+
+### DI
+
+* Constructor based
+
+    ```xml
+    <!--引用：ref-->
+    <constructor-arg ref="spellChecker"/>
+    <!--值：value-->
+    <constructor-arg type="java.lang.String" value="Zara"/>
+    ```
+
+* Setter based
+
+    ```xml
+    <!--in java: setter is needed-->
+    <property name="spellChecker" ref="spellChecker"/>
+    <!--传递null值-->
+    <property name="email"><null/></property>
+    ```
+
+* Inner beans 内部bean类
+
+    ```xml
+    <property name="spellChecker">
+      <bean id="spellChecker" class="com.tutorialspoint.SpellChecker"/>
+    </property>
+    ```
+
+* Collection 集合
+
+    ```xml
+    <!--in java: setters of List, Set, Map, Properties are needed-->
+    <!--list-->
+    <property name="addressList">
+      <list>
+        <value>INDIA</value>
+        <value>Pakistan</value>
+      </list>
+    </property>
+    <!--set-->
+    <property name="addressSet">
+      <set>
+        <value>INDIA</value>
+        <value>Pakistan</value>
+      </set>
+    </property>
+    <!--map-->
+    <property name="addressMap">
+      <map>
+        <entry key="1" value="INDIA"/>
+        <entry key="2" value="Pakistan"/>
+      </map>
+    </property>
+    <!--props-->
+    <property name="addressProp">
+      <props>
+        <prop key="one">INDIA</prop>
+        <prop key="two">Pakistan</prop>
+      </props>
+    </property>
+    ```
+
+### 自动装配
+
+减少编写XML，使用bean的autowire定义自动装配模式
+| autowire    | description                                                                    |
+| :---------- | :----------------------------------------------------------------------------- |
+| no          | 无自动装配                                                                     |
+| byName      | 由属性名装配                                                                   |
+| byType      | 由属性数据类型配                                                               |
+| constructor | 类似byType，但适用构造函数参数类型。若容器中无构造函数参数类型的bean，则会报错 |
+| autodetect  | 先尝试constructor自动装配，若不执行则尝试通过byType装配                        |
+
+```xml
+<bean id="textEditor" class="com.tutorialspoint.TextEditor" 
+      autowire="byName">
+      <property name="name" value="Generic Text Editor" />
+</bean>
+```
+
+
+
+#### byName
+
+由属性名指定自动装配
 
 ## Concepts
 
@@ -11,10 +209,10 @@ J2EE?
     > 1. 提供默认*无参*构造函数  
     > 2. 实现Serilizable接口，可被序列化  
     > 3. 可能有一系列读写属性  
-    > 4. 可能有getter, setter  
+    > 4. 可能有getter, setter
 
 * POJO: Plain Ordinary Java Objects  
-    > 没有业务逻辑 ~ value object | Data transfer object ~ JavaBean  
+    > 没有业务逻辑 ~ value object | Data transfer object ~ JavaBean
 
 ### what can spring do
 
@@ -25,20 +223,22 @@ J2EE?
 > 无缝集成第三方Web框架 - 且提供了Spring MVC  
 > 方便与Java EE整合  
 
-### Structure  
-**Data Access/Integration层** -> JDBC, ORM, OXM, JMS, Transaction  
-**Web层** -> Web, Web-Servlet, WebSocket, Web-Porlet  
-**AOP层** -> 符合AOP联盟便准的面向切片编程实现  
-**Core Container** -> Beans, Core, Context, SpEL  
-**Test模块** -> JUnit, TestNG  
+### Structure
 
-# Spring IoC, DI  
-IoC = Inverse of Control 控制反转  
-> 一种设计思想：将原本手动创建对象的控制权交由Spring管理  
-DI = Dependency Injection 依赖注入  
-> 将对象依赖属性由配置设值给该对象 -> 从new转变为由IOC创建  
-> 
-### 创建对象的方式  
+* Data Access/Integration层 -> JDBC, ORM, OXM, JMS, Transaction  
+* Web层 -> Web, Web-Servlet, WebSocket, Web-Porlet  
+* AOP层 -> 符合AOP联盟便准的面向切片编程实现  
+* Core Container -> Beans, Core, Context, SpEL  
+* Test模块 -> JUnit, TestNG  
+
+# Spring IoC, DI
+
+* IoC = Inverse of Control 控制反转  
+  * 一种设计思想：将原本手动创建对象的控制权交由Spring管理
+* DI = Dependency Injection 依赖注入  
+  * 将对象依赖属性由配置设值给该对象 -> 从new转变为由IOC创建  
+
+### 创建对象的方式
 
 先创建测试类 -> testBean  
 1. **用默认构造方法**  
@@ -59,14 +259,19 @@ test.display();
 ```
   
 1. **静态工厂**  
-创建静态工厂类 testBeanStaticFactory  
-> 实现 public static testBean getInstance(){ return new testBean; }  
-applicationContext.xml  
+
+创建静态工厂类 testBeanStaticFactory
+> 实现 public static testBean getInstance(){ return new testBean; } 
+
+applicationContext.xml
+
 ```xml  
 <bean id="testBeanStaticFactory" factory-method="getInstance" class="FactoryClassPath"></bean>  
-```  
-使用  
-```java  
+```
+
+使用
+
+```java
 ApplicationContext context = new ClassPathXmlApplicationContex("applicationContext.xml");  
 testBean staticFactory = (testBean) context.getBean("testBeanStaticFactory");  
 staticFactory.display();  
@@ -111,7 +316,8 @@ Dependency Injection = 通过反射实现依赖注入（给属性赋值）
 > 若干属性  
 > private Properties properties  
 >> properties getter/setter  
-在applicationContext.xml中赋值  
+在applicationContext.xml中赋值
+
 ```xml  
 <bean id="person" class="classPath+Name">  
   <property name="pid" value="1"></property>  
@@ -127,14 +333,19 @@ Dependency Injection = 通过反射实现依赖注入（给属性赋值）
   </property>  
 </bean>  
 ```  
+
 测试  
+
 ```java  
 ApplicationContext contxt = ...  
 Person person = (Person) context.getBean("person);  
 System.out(person.getName());  
 ```  
+
 2. **利用构造函数赋值**  
-创建实体类Person, 带参构造函数  
+
+创建实体类Person, 带参构造函数
+
 ```xml  
 <bean id="person_con" class="com.ys.di.Person">  
   <constructor-arg index="0" type="java.lang.Long" value="1"></constructor-arg>  

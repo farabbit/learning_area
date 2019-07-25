@@ -17,50 +17,13 @@ enroll		v	注册、入会
 intricate	adj	错综复杂的
 intricacy	n	错综复杂的事物
 daunt		v	使胆怯
-site		v	使定位/落址
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-which of the following ... relevant to cbce
-134x 34x 123x
-when engaging in ... staff mush:
-1234 x 123 x 124 x 234x
-which country engagement when undertaking ...
-23 x 3 x 1234x
-which topics covered by rules
-124 x 1234 x
-to parts
-34x 23x 24x 1234x
-stuff should
-12x
-
-which of the following is CONSISTENT
-1234+
-relevant to cbce
-1234+
-which covers
-1234+
-client types
-123+
-cmpling you help to protect
-12+
-who need 
-123+
+contigence	n	接触、意外事件
+contigency	n	可能发生的事，偶发（不测）事件、意外事故
+pledge		n	抵押品、誓约
+pledge		n	保证给予，正式承诺
+mature		adj	成熟的
+maturity	n	成熟，成年，完全成长
+convention	n	习俗
+subtract	v	减去，减法，差集
+punctuation	n	标点符号
+quote		n 	引用
