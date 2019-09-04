@@ -1,5 +1,12 @@
 # linux
 
+## util
+
+```shell
+# convert dos(windows) file to unix(linux) file
+dos2unix <filebame>
+```
+
 ## advanced
 
 ### grep

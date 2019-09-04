@@ -11,9 +11,9 @@ J2EE?
 ![Spring Framework](https://7n.w3cschool.cn/attachments/image/wk/wkspring/arch1.png)
 
 * Core container
-  1. spring-core => 框架基础，包括IoC和DI
-  2. spring-beans => 提供BeanFactory，移除编码式单例，把配置和依赖从实际编码逻辑中解耦
-  3. spring-context => 建立在core与beans上，提供类似JNDI注册方式访问对象，继承Bean
+  1. spring-core => 框架基础, 包括IoC和DI
+  2. spring-beans => 提供BeanFactory, 移除编码式单例, 把配置和依赖从实际编码逻辑中解耦
+  3. spring-context => 建立在core与beans上, 提供类似JNDI注册方式访问对象, 继承Bean
       > ApplicationContext是Context的焦点
   4. spring-context-support => 提供第三方继承库到spring context的支持
   5. spring-expression
@@ -26,14 +26,14 @@ J2EE?
   4. JMS => 包含生产（produce）和消费（consume）消息的功能
   5. Transactions事务 => 为实现特殊接口类及POJO支持编程式和声明式事务管理
       > * 声明式：通过注解或配置由spring自动配置
-      > * 编程式：自己写beginTransaction(), commit(), rollback()等，粒度更细
+      > * 编程式：自己写beginTransaction(), commit(), rollback()等, 粒度更细
 * Web
   1. Web => 提供面向web的基本功能和面向web的应用上下文
-      > multipart文件上传、用Servlet监听器初始化IoC容器，以及HTTP客户端和Spring远程调用中web部分。
+      > multipart文件上传、用Servlet监听器初始化IoC容器, 以及HTTP客户端和Spring远程调用中web部分.
   2. Web-MVC => 模块为web应用提供MVC和REST服务的实现
-      > Spring MVC可完全分离领域模型代码和web表单，且可与Spring框架的其它所有功能集成。
-  3. Web-Socket => 为WebSocket-based提供了支持，而且在web应用中提供C/S间通信的两种方式。
-  4. Web-Portlet => 提供用于Portlet环境的MVC实现，反映了spring-web-mvc的功能
+      > Spring MVC可完全分离领域模型代码和web表单, 且可与Spring框架的其它所有功能集成.
+  3. Web-Socket => 为WebSocket-based提供了支持, 而且在web应用中提供C/S间通信的两种方式.
+  4. Web-Portlet => 提供用于Portlet环境的MVC实现, 反映了spring-web-mvc的功能
 * 其他
   1. AOP => 提供面向方面的实现
       > 允许定义方法拦截器、切入点对代码解耦
@@ -43,13 +43,15 @@ J2EE?
 
 ### IoC容器
 
+---
+
 IoC控制反转：将new交由Spring容器
 
-容器创建、连接、配置、管理对象。Spring容器用DI来管理组成应用程序的组建：Spring Beans.
+容器创建、连接、配置、管理对象. Spring容器用DI来管理组成应用程序的组建：Spring Beans.
 
 * BeanFacotory容器
-  > 由org.springframework.beans.factory.BeanFactory接口定义。  
-  > BeanFactory或相关接口，如BeanFactoryAware，InitializingBean，DisposableBean在Spring中仍然存在具大量与 Spring 整合的第三方框架反向兼容性的目的。
+  > 由org.springframework.beans.factory.BeanFactory接口定义.   
+  > BeanFactory或相关接口, 如BeanFactoryAware, InitializingBean, DisposableBean在Spring中仍然存在具大量与 Spring 整合的第三方框架反向兼容性的目的.
 * ApplicationContext容器
   > 由org.springframework.context.ApplicationContext定义  
   > 包括BeanFactory所有功能
@@ -57,7 +59,7 @@ IoC控制反转：将new交由Spring容器
 #### BeanFactory
 
 对BeanFactory接口的实现：XmlBeanFactory
-资源宝贵的设备中一般用BeanFacotry，否则一般用ApplicationContext
+资源宝贵的设备中一般用BeanFacotry, 否则一般用ApplicationContext
 
 #### ApplicationContext
 
@@ -65,26 +67,26 @@ BeanFacotry的子接口
 
 常用ApplicationContext接口实现
 
-* FileSystemXmlApplicationContext：从XML中加载bean。需要提供给构造器 XML 文件的完整路径。
-* ClassPathXmlApplicationContext：从XML。。中加载bean。不需要提供XML完整路径，只需配置 CLASSPATH环境变量，容器会从CLASSPATH中搜索bean配置文件。
+* FileSystemXmlApplicationContext：从XML中加载bean. 需要提供给构造器 XML 文件的完整路径.
+* ClassPathXmlApplicationContext：从XML. . 中加载bean. 不需要提供XML完整路径, 只需配置 CLASSPATH环境变量, 容器会从CLASSPATH中搜索bean配置文件.
 * WebXmlApplicationContext：容器会在web应用程序范围内加载在XML中已被定义的bean
 
 ### Bean
 
-bean = 被实例化，组装，并通过Spring IoC容器所管理的对象
+bean = 被实例化, 组装, 并通过Spring IoC容器所管理的对象
 由配置元数据(Meta-data)创建
 
-| property                 | description                                                                      |
-| :----------------------- | :------------------------------------------------------------------------------- |
-| class                    | 强制性的，指定用来创建bean的bean类。                                             |
-| name                     | 指定唯一bean标识符。在基于XML的配置元数据中，可用ID和/或name属性指定bean标识符。 |
-| scope                    | 指定由特定bean定义创建对象的作用域                                               |
-| lazy-initialization mode | 延迟初始化的bean, 告诉IoC容器在它第一次被请求时，而非启动时创建bean实例。        |
-| initialization (method)  | 在 bean 的所有必需的属性被容器设置之后，调用回调方法。                           |
-| destruction (method)     | 当包含该 bean 的容器被销毁时，使用回调方法。                                     |
-| constructor-arg          | 用来注入依赖关系                                                                 |
-| properties               | 用来注入依赖关系                                                                 |
-| autowiring mode          | 用来注入依赖关系                                                                 |
+| property                 | description                                                                    |
+| :----------------------- | :----------------------------------------------------------------------------- |
+| class                    | 强制性的, 指定用来创建bean的bean类                                             |
+| name                     | 指定唯一bean标识符. 在基于XML的配置元数据中, 可用ID和/或name属性指定bean标识符 |
+| scope                    | 指定由特定bean定义创建对象的作用域                                             |
+| lazy-initialization mode | 延迟初始化的bean, 告诉IoC容器在它第一次被请求时, 而非启动时创建bean实例        |
+| initialization (method)  | 在 bean 的所有必需的属性被容器设置之后, 调用回调方法                           |
+| destruction (method)     | 当包含该 bean 的容器被销毁时, 使用回调方法                                     |
+| constructor-arg          | 用来注入依赖关系                                                               |
+| properties               | 用来注入依赖关系                                                               |
+| autowiring mode          | 用来注入依赖关系                                                               |
 
 配置元数据
 
@@ -97,10 +99,10 @@ bean = 被实例化，组装，并通过Spring IoC容器所管理的对象
 | scope          | description                                                                                  |
 | :------------- | :------------------------------------------------------------------------------------------- |
 | singleton      | Bean以单例方式存在                                                                           |
-| prototype      | 每次从容器调用Bean时，都返回新实例，即每次调用getBean()时，相当于执行newXxxBean()            |
-| request        | 每次HTTP请求都会创建新Bean，该作用域仅适用于WebApplicationContext环境                        |
-| session        | 同一个HTTP Session共享一个Bean，不同Session使用不同的Bean，仅适用于WebApplicationContext环境 |
-| global-session | 一般用于Portlet应用环境，该域仅适用于WebApplicationContext环境                               |
+| prototype      | 每次从容器调用Bean时, 都返回新实例, 即每次调用getBean()时, 相当于执行newXxxBean()            |
+| request        | 每次HTTP请求都会创建新Bean, 该作用域仅适用于WebApplicationContext环境                        |
+| session        | 同一个HTTP Session共享一个Bean, 不同Session使用不同的Bean, 仅适用于WebApplicationContext环境 |
+| global-session | 一般用于Portlet应用环境, 该域仅适用于WebApplicationContext环境                               |
 
 #### 生命周期
 
@@ -116,6 +118,8 @@ bean = 被实例化，组装，并通过Spring IoC容器所管理的对象
 * parent="parent_name"
 
 ### DI
+
+---
 
 * Constructor based
 
@@ -179,14 +183,14 @@ bean = 被实例化，组装，并通过Spring IoC容器所管理的对象
 
 ### 自动装配
 
-减少编写XML，使用bean的autowire定义自动装配模式
+减少编写XML, 使用bean的autowire定义自动装配模式
 | autowire    | description                                                                    |
 | :---------- | :----------------------------------------------------------------------------- |
 | no          | 无自动装配                                                                     |
 | byName      | 由属性名装配                                                                   |
 | byType      | 由属性数据类型配                                                               |
-| constructor | 类似byType，但适用构造函数参数类型。若容器中无构造函数参数类型的bean，则会报错 |
-| autodetect  | 先尝试constructor自动装配，若不执行则尝试通过byType装配                        |
+| constructor | 类似byType, 但适用构造函数参数类型. 若容器中无构造函数参数类型的bean, 则会报错 |
+| autodetect  | 先尝试constructor自动装配, 若不执行则尝试通过byType装配                        |
 
 ```xml
 <bean id="textEditor" class="com.tutorialspoint.TextEditor" 
@@ -195,35 +199,276 @@ bean = 被实例化，组装，并通过Spring IoC容器所管理的对象
 </bean>
 ```
 
+* byName / byType / byConstructor
+
+由属性名/属性类型/构造函数参数列表指定自动装配
+
+```xml
+<bean id="textEditor" class="com.tutorialspoint.TextEditor" autowire="byName"><!--or byType--><!--or byConstrucor-->
+    <!--property spellCheck will be automaticly be wired-->
+    <property name="name" value="Generic Text Editor" />
+</bean>
+<bean id="spellChecker" class="com.tutorialspoint.SpellChecker" />
+```
+
+### Annotation
+
+---
+
+config file
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+   <context:annotation-config/>
+   <!-- bean definitions go here -->
+
+</beans>
+```
+
+#### @Required
+
+bean必须设置此属性
+
+#### @Autowired
+
+可注释setter方法或属性
+
+#### @Quolifier
+
+创建多个相同类型的bean自动装配时可能会引起歧义, 使用@Qualifier可消除混乱
+
+```java
+@Autowired
+@Qualifier("student1")
+Private Student student;
+```
+
+```xml
+<bean id="student1" class="Student">
+```
+
+#### Spring JSR-250注释
+
+##### @PostConstruct, @PreDestroy
+
+```java
+   @PostConstruct
+   public void init(){ System.out.println("Bean is going through init."); }
+   @PreDestroy
+   public void destroy(){ System.out.println("Bean will destroy now."); }
+```
+
+```xml
+<bean id="helloWorld" 
+    class="com.tutorialspoint.HelloWorld"
+    init-method="init" destroy-method="destroy">
+    <property name="message" value="Hello World!"/>
+</bean>
+```
+
+##### @Resource
+
+~ byName
+
+```java
+@Resource(name="spellChecker")
+public void setSpellChecker( SpellChecker spellChecker ){ this.spellChecker = spellChecker; }
+```
+
+#### 基于Java的配置
+
+##### @Configuration / @Bean
+
+```java
+@Configuration
+public class HelloWorldConfig {
+    @Bean
+    public HelloWorld helloworld(){
+        return new HelloWorld();
+    }
+}
+```
+
+等同于如下配置
+
+```xml
+<beans>
+    <bean id="helloWorld" class="com.tutorialspoint.HelloWorld" />
+</beans>
+```
+
+可以使用AnnotationConfigApplicationContext
+
+```java
+public static void main(String[] args) {
+   ApplicationContext ctx = new AnnotationConfigApplicationContext(HelloWorldConfig.class);
+   HelloWorld helloWorld = ctx.getBean(HelloWorld.class);
+   helloWorld.setMessage("Hello World!");
+   helloWorld.getMessage();
+}
+```
+
+##### @Import
+
+从另一个配置类中加载
+
+```java
+@Configuration
+public class ConfigA {
+   @Bean
+   public A a() {
+      return new A(); 
+   }
+}
+
+@Configuration
+@Import(ConfigA.class)
+public class ConfigB {
+   @Bean
+   public B a() {
+      return new A(); 
+   }
+}
+```
+
+##### 生命周期回调
+
+```java
+public class Foo {
+   public void init() {
+      // initialization logic
+   }
+   public void cleanup() {
+      // destruction logic
+   }
+}
+
+@Configuration
+public class AppConfig {
+   @Bean(initMethod = "init", destroyMethod = "cleanup" )
+   public Foo foo() {
+      return new Foo();
+   }
+}
+```
+
+#### Spring事件处理
+
+| Spring内置事件        | 描述                                                                                                                                                          |
+| :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ContextRefreshedEvent | ApplicationContext初始化或刷新时, 该事件发布. 也可在ConfigurableApplicationContext接口中用refresh()方法手动发生                                               |
+| ContextStartedEvent   | 当用ConfigurableApplicationContext接口中start()启动ApplicationContext时, 该事件发布. 你可以调查你的数据库, 或者你可以在接受到这个事件后重启任何停止的应用程序 |
+| ContextStoppedEvent   | 当用ConfigurableApplicationContext接口中stop()停止ApplicationContext时, 该事件发布. 可在接受到此事件后做清理工作                                              |
+| ContextClosedEvent    | 当用ConfigurableApplicationContext接口中close()关闭ApplicationContext时, 该事件发布. 一个已关闭的上下文到达生命周期末端；它不能被刷新或重启                   |
+| RequestHandledEvent   | web-specific事件, 告诉所有bean HTTP请求已被服务                                                                                                               |
+
+Spring事件处理是单线程的, 除非所有接收者得到该消息, 否则进程被阻塞, 流程不会继续
+
+#### 自定义事件
+
+*TODO*
+extends ApplicationEvent
+
+### AOP Aspect Orientied Programming 面向切面编程
+
+---
+
+把程序逻辑分解成关注点, 提供**拦截器**在执行方法前后添加额外功能
+
+术语
+
+| nouns         | description                                                                                                   |
+| :------------ | :------------------------------------------------------------------------------------------------------------ |
+| Aspect        | 一个模块具有一组提供横切需求的APIs. 如日志模块为了记录日志将被 AOP aspect调用, 程序可以拥有任意数量的aspect   |
+| Join point    | 在应用程序中代表一个点, 可在插件AOP方面. 你也能说, 它是在实际的应用程序中, 其中一个操作将使用 Spring AOP 框架 |
+| Advice        | 实际行动前后执行的方法. 是在程序执行期间通过Spring AOP框架实际被调用的代码                                    |
+| Pointcut      | 一组一个或多个连接点, 通知应该被执行. 可使用表达式或模式指定切入点                                            |
+| Introduction  | 引用: 允许添加新方法或属性到现有类中                                                                          |
+| Target object | 被一或多个aspect所通知的对象, 此对象永远是被代理对象, 也称为被通知对象                                        |
+| Weaving       | Weaving 把aspect连接到其它的应用程序类型或对象, 并创建被通知的对象. 可在编译时, 类加载时, 运行时完成          |
+
+通知类型
+
+| 通知           | 描述                                             |
+| :------------- | :----------------------------------------------- |
+| 前置通知       | 在方法执行前, 执行通知                           |
+| 后置通知       | 在方法执行后, 不考虑其结果, 执行通知             |
+| 返回后通知     | 在方法执行后, 只方法成功完成后, 才执行通知       |
+| 抛出异常后通知 | 在方法执行后, 只在方法退出抛出异常后, 才执行通知 |
+| 环绕通知       | 在建议方法调用前后, 执行通知                     |
+
+自定义aspect
+
+* @AspectJ
+* XML Schema based
 
 
-#### byName
+config file
 
-由属性名指定自动装配
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd ">
 
-## Concepts
+   <!-- bean definition & AOP specific configuration -->
+
+</beans>
+```
+
+#### AOP based xml framework
+
+```xml
+<aop:config>
+   <aop:aspect id="myAspect" ref="aBean">
+   ...
+   </aop:aspect>
+</aop:config>
+<bean id="aBean" class="...">
+...
+</bean>
+```
+
+
+
+## before
+
+### Concepts
 
 * 非侵入式设计 无需继承框架提供的任何类  
   
-* JavaBean 特殊Java类，遵循JavaBean API规范  
+* JavaBean 特殊Java类, 遵循JavaBean API规范  
     > 1. 提供默认*无参*构造函数  
-    > 2. 实现Serilizable接口，可被序列化  
+    > 2. 实现Serilizable接口, 可被序列化  
     > 3. 可能有一系列读写属性  
     > 4. 可能有getter, setter
 
 * POJO: Plain Ordinary Java Objects  
     > 没有业务逻辑 ~ value object | Data transfer object ~ JavaBean
 
-### what can spring do
+#### what can spring do
 
 > 根据配置文件, 创建、组装对象间依赖关系  
-> 面向切片编程 -> 无耦合实现 日志记录，性能统计，安全控制  
+> 面向切片编程 -> 无耦合实现 日志记录, 性能统计, 安全控制  
 > 管理数据库事务  
 > 第三方数据访问框架 - Hibernate, JPA - 提供了JDBC访问模板  
 > 无缝集成第三方Web框架 - 且提供了Spring MVC  
 > 方便与Java EE整合  
 
-### Structure
+#### Structure
 
 * Data Access/Integration层 -> JDBC, ORM, OXM, JMS, Transaction  
 * Web层 -> Web, Web-Servlet, WebSocket, Web-Porlet  
@@ -372,9 +617,9 @@ System.out.println(person.getPid());
 > * @Repository -> dao层  
 > * @Servic -> service层  
 > * @Controller -> web层  
-3. @Resource，按照名称装配  
-需要别的类作为属性时，需要加@Resource(name="xxx")  
-4. @Autowired，按照类型装配  
+3. @Resource, 按照名称装配  
+需要别的类作为属性时, 需要加@Resource(name="xxx")  
+4. @Autowired, 按照类型装配  
 *TODO*  
 
 
@@ -384,14 +629,14 @@ System.out.println(person.getPid());
 # Spring AOP 面向切片编程  
 Aspect Oriented programming  
 **思想**  
-解剖开封装对象的内部，将影响多个类的公共行封装到可重用模块，命名为Aspect=切面  
+解剖开封装对象的内部, 将影响多个类的公共行封装到可重用模块, 命名为Aspect=切面  
 功能分为  
-> 核心业务 登陆，增删改查  
-> 周边功能 性能统计，日志，事务管理 = 切面  
+> 核心业务 登陆, 增删改查  
+> 周边功能 性能统计, 日志, 事务管理 = 切面  
 
-两功能独立开发，切面+核心业务 = AOP  
+两功能独立开发, 切面+核心业务 = AOP  
 **目的**   
-封装与业务无关。但为业务模块共同调用的逻辑、责任封装，去重减耦，增加扩展维护性  
+封装与业务无关. 但为业务模块共同调用的逻辑、责任封装, 去重减耦, 增加扩展维护性  
 
 **Concepts**  
 > target 需被代理的类  
@@ -415,20 +660,20 @@ C[客户]|代理对象|<--P[代理对象]|返回结果|<--O[目标对象];
 
 1. **静态代理**  
 * > 接口  
-* > 实现类，实现接口  
-* > [事务类，实现before(), after() -> printSth]  
-* > 代理类，将实现类作为属性，实现接口调用实现类的函数->可前拦截、后拦截  
+* > 实现类, 实现接口  
+* > [事务类, 实现before(), after() -> printSth]  
+* > 代理类, 将实现类作为属性, 实现接口调用实现类的函数->可前拦截、后拦截  
 缺点  
-代理类要实现与目标对象一样的接口，代理类繁多、不易维护，接口增加方法时，对象和代理类都要维护  
+代理类要实现与目标对象一样的接口, 代理类繁多、不易维护, 接口增加方法时, 对象和代理类都要维护  
 1. **JDK动态代理**  
-动态地在内存中构建代理对象（制定目标对象接口类型），利用JDK的API生成指定接口对象  
+动态地在内存中构建代理对象（制定目标对象接口类型）, 利用JDK的API生成指定接口对象  
 代理类  
 ```java  
 import java.lang.reflect.InvocationHandler;  
 import java.lang.reflect.Method;  
 import java.lang.reflect.Proxy;  
 
-import packagePath.myTransaction; // 事务类 -> 处理逻辑外事务，如output  
+import packagePath.myTransaction; // 事务类 -> 处理逻辑外事务, 如output  
 
 public class ObjectInterceptor implements InvocationHandler{  
     private Object target; //目标类  
@@ -477,11 +722,11 @@ public void testAop(){
 ```  
 
 * 总结：  
-依赖注入：松耦合，装配  
-AOP：将事务与目标类分离，配置切面  
+依赖注入：松耦合, 装配  
+AOP：将事务与目标类分离, 配置切面  
 
-有需要用到的类，在xml中加一条就行了  
-有耦合关系，在xml中配置  
+有需要用到的类, 在xml中加一条就行了  
+有耦合关系, 在xml中配置  
 
 
 * 模板  
@@ -533,14 +778,14 @@ Spring模块
 2. 定义实现类SgtPeppers implements CompactDisc  
 3. 定义配置类CDPlayConfig并启用组建扫描  
 > @Configuration  
-> @ComponentScan -> 类中未显式声明类时，扫描当前包  
+> @ComponentScan -> 类中未显式声明类时, 扫描当前包  
 或者通过XML启用  
 ```xml  
 <context:component-scan base-package="packageName"/>  
 ```  
 ### Bean注解  
 
-* @Autowired 自动寻找匹配，可以对应函数或属性  
+* @Autowired 自动寻找匹配, 可以对应函数或属性  
 *TODO*  
 
 ## 利用Java代码装配

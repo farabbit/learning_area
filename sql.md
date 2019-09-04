@@ -8,6 +8,17 @@ select columns
 SELECT t.COLUMN_NAME FROM USER_TAB_COLUMNS t where t.TABLE_NAME='SENTRY_SETTLEMENTINSTRUCTION';
 ```
 
+## syntax
+
+### LISTAGG() WITHIN GROUP()
+
+```sql
+select deptno,
+       listagg (ename, ',') WITHIN GROUP(ODER BY ENAME) names
+from emp
+group by deptno
+```
+
 ## concepts
 
 ### Pseudo-column
