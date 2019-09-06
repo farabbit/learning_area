@@ -8,15 +8,15 @@ resuable solutions to commonly occruing problems, started as best practice appli
 
 ## Creation Design Patterns
 
-### Singleton
+### Singleton 单例模式
 
 ---
 
 > Ensure only **one instance** of a class created, provide **GLOBAL ACCESS POINT** to the object
 
-### 工厂 Factory
+### Factory 工厂
 
-#### 简单工厂模式 Factory
+#### Factory 简单工厂模式
 
 ---
 
@@ -36,7 +36,7 @@ structure
 * 实现类 Concrete Product -> XX getXX() -> return XX
 * 工厂 Factory = 用于产生不同的类 => 集中了所有实例的**创建逻辑**，不利于责任分配
 
-#### 工厂方法 Factory Method
+#### Factory Method 工厂方法
 
 ---
 
@@ -59,9 +59,9 @@ structure
 * Concrete Factory
 * Factory
 
-#### 抽象工厂
+#### Abstract factory 抽象工厂
 
-pass
+TODO
 
 ### 建造者模式 Builder
 
@@ -74,9 +74,13 @@ pass
   * ConcreteBuilder
   * Director
 
-## 行为型模式 Behavior Patterns
+## Behavior Patterns 行为型模式
 
-### 责任链模式 Chain of responsibility
+### Strategy 策略模式
+
+![Strategy](https://www.oodesign.com/images/design_patterns/behavioral/strategy_implementation_-_uml_class_diagram.gif)
+
+### Chain of responsibility 责任链模式
 
 > Objects become part of the chain, **request is sent from one object to another** until one object handle it
 

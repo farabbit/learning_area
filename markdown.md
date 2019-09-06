@@ -33,10 +33,9 @@ this is not quotation
 > this is layer 1 quotation
 >> this is layer 2 quotation
 
-
 ### seperator
-#### */-/_ (at least 3)
 
+ */-/_ (at least 3)
 
 ### link
 
@@ -81,15 +80,15 @@ here
 ~~message~~
 
 ### 待办事项
+
 [ ] 未完成
 [x] 已完成
 
-### 流程图
+### Diagram 流程图
 
-graph
--->
----
-```
+需要插件支持，如mermaid等
+
+```mermaid
 graph LR
 A --> B
 ```

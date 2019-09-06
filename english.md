@@ -28,7 +28,29 @@
 | maturity        | n              | 成熟, 成年, 完全成长                       |
 | convention      | n              | 习俗                                       |
 | subtract        | v              | 减去, 减法, 差集                           |
-| punctuation     | n              | 标点符号                                   |
 | quote           | n              | 引用                                       |
+| paste           | n              | 膏状物，糨糊: toothpaste 牙膏              |
+| periodic table  | n              | 元素周期表                                 |
 | ~~margin~~      | n              | 保证金                                     |
 | ~~margin call~~ | n              | 保证金追缴通知                             |
+
+## signs
+
+| sign | eng                              |
+| :--- | :------------------------------- |
+| !    | exclam, exclamation mark         |
+| &    | ampersand                        |
+| #    | harsh mark, numbersign           |
+| *    | asterisk, star                   |
+| ^    | caret                            |
+| ~    | tilde                            |
+| -    | minus, hyphen, dash              |
+| _    | underscore                       |
+| \|   | bar                              |
+| :    | colon                            |
+| ;    | semicolon                        |
+| ()   | paren, parentheses, round backet |
+| []   | bracket                          |
+| {}   | brace                            |
+| >>   | much greater than                |
+| <<   | much less than                   |
