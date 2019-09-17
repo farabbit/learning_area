@@ -67,17 +67,19 @@ del DigitList[2:5] # 0,1,7,8,9
 
 ---
 
+duck type: classes do not need to interited from a perennt class 
+
 ```python
 class Deck:
     def __init__(self): self._cards=[suit+str(rank) for rank in range(10) for suit in 'ABCD' ]
     def __repr__(self): return ','.join(_cards)
     def __len__(self): return len(self._cards)
-    def __getitem__(self, index): return self._cards[index] # iterable -> enables: in, slice [::], reversed(), sorted()
+    def __getitem__(self, index): return self._cards[index] # iterable -> enables: in, slice [::], reversed(), sorted(), ...
     def __call__(self,index): return self[index] # deck(9)
     def __setitem__(self,key,value): pass # deck['D2'] = Card('Diamond','2')
     def __getitem__(self,key): pass # print(deck['D2'])
     def __delitem__(self,key): pass # del deck['D2']
-    def __iter__(self): pass #
+    def __iter__(self): pass # TODO
 ```
 
 ## functional programming 函数式编程
@@ -191,8 +193,7 @@ class Context_res:
     """ class that using Strategy """
     def __init__(self, intA, intB): self.intA, self.intB = intA, intB
 
-    def setStrategy(self, strategy):
-        self.strategy = strategy
+    def setStrategy(self, strategy): self.strategy = strategy
 
     def executeStrategy(self):
         return self.strategy(self)
@@ -202,36 +203,218 @@ strategies = (globals()[name] for name in globals()  if = name.startswith('Strat
 
 TODO: see DesignPatterns/Strategy.py
 
-## multithread
+### command pattern 命令模式
 
-two ways to pack thread
+> Behaviour pattern 行为型模式，请求以命令的形式包裹在对象中，并传给调用对象  
+> 调用对象寻找可以处理该命令的合适对象，并令其执行
 
-* function -> _thread.start_new_thread(function, args[, kwargs])
-* class -> threading
+TODO: see /DesignPatterns/Command.py
 
-### threading module
+## Decorator 装饰器
 
-include all functionalities of _thread, have more functions
+---
+
+> 'tag' functions to enhance their behavior  
+> understand **Closure** before learning Decorator
+
+definition:
+> Decorator is callable objects takes a function as its parameter (the parameter is the function which been decorated)
+
+### basic decorator demo
 
 ```python
-threading.currentThread() # return current thread variable
-threading.enumerate() # return a list of all running thread
-threading.activeCount() # return running thread count
+def decorator(func): return func
+
+@decorator
+def taget(): print("running target()")
+# same effect as
+def taget(): print("running target()")
+target = decorator(target)
 ```
 
-### thread class
+> The target function been decorated will **be replaced by** decorator  
+> decorator will be **executed once** the function been **defined**
+
+### use decorator to enhance strategy pattern
+
+> registe the strategy once it has been defined
+
+TODO: see /DesignPatterns/Strategy.py
+
+### variable scope 变量作用域
+
+1. 函数内可以直接使用全局变量
+2. 函数内若给与某全局变量名称相同的变量赋值，该变量会变为局部变量
+3. 只要函数内部改变变量的值，编译时便会认为在本函数中改变了为局部变量
+4. 作为参数传递的全局变量在函数内是局部变量
+5. 若要在函数内改变全局变量的值，使用global关键字修饰
+
+### Closure 闭包
+
+TODO: 复习闭包
+
+> 指延展了作用于的函数，可访问定义体之外的**非全局变量**
 
 ```python
-# directly use Thread class
-T1 = threading.Thread(target=Method, args=(),kwargs={})
-T1.start()
-# inherit Thread class
-class T2(Threading.thread):
-    def run(self): pass
-.run() # thread activities, DO NOT NEED TO explicitly call
-.start() # start thread, WILL CALL .RUN()
-.join([time]) # ???
-.isAlive()
-.getName()
-.setName()
+def make_average(): # higher-order function that returns a function
+    series = [] # free variable, can save status
+    def averager(new_value): # this is a closure, it can access the list series
+        series.append(new_value)
+        total = sum(series)
+        return total/len(series)
+    return averager
+
+avg=make_averate()
+avg(10) # 10
+avg(12) # 11
+# python stores local var and free var in __code__( __code__ is compiled function definition)
+avg.__code__.co_varnames # ('new_value', 'total')
+avg.__code__.co_freevars # ('series',)
+# __closure__ is a list that reflects every variable name in __code__.co_freevars
+avg.__closure__ # (<cell at 0x107a44f78: list object at 0x107a91a48>,)
+avg.__closure__[0].cell_contents # [10, 12]
 ```
+
+### Nonlocal annoncement
+
+```python
+def make_averager():
+    count = 0; total = 0
+    def averager(new_value):
+        nonlocal count, total # if no nonlocal here, count & total will be compiled as local variable
+        count += 1
+        total += new_value
+        return total / count
+    return averager
+```
+
+### decorator
+
+```python
+import operator
+import functools
+
+def OperatorForDisplay(operatorFunc):
+    # can add decorator functools.wraps(func) to support keyword parameters
+    def Display(*nums): # not support **kwargs in normal closure
+        print("The", operatorFunc.__name__,"result of", *nums, "is", operatorFunc(*nums))
+    return Display
+
+@OperatorForDisplay
+def Add(*nums): return sum(nums)
+
+@OperatorForDisplay
+def Mul(*nums): return functools.reduce(operator.mul, nums)
+
+# function changed after decorated by OperatorForDisplay
+Add(2,3,4) # The Add result of 2 3 4 is 9
+Mul(2,3,4) # The Mul result of 2 3 4 is 24
+```
+
+### decorator in std lib
+
+* @functools.lru_cache(), cache function result
+* @functools.singledispatch, 将函数变为 *single dispatch generic function 单分派泛函数*
+
+#### @lru_cache()
+
+cache function result, Least Recent Used, 缓存函数结果，若再有使用相同参数的调用，将直接使用缓存结果，最久未使用的缓存将被清除
+> 用于修饰无状态的函数，或需要慢速递归的函数如递归生成斐波那契数列，可大幅度缩减所需时间  
+> 被修饰的函数的参数必须hashable  
+> maxsize最好是2的幂以获得最佳性能，typed=True时不同类型的参数将分别储存，如1与1.0
+
+```python
+import functools
+
+@functools.lru_cache()
+def fibonacci(n):
+    return n if n < 2 else fibonacci(n-2) + fibonacci(n-1)
+```
+
+#### @singledispatch
+
+将函数变为 *single dispatch generic function 单分派泛函数* -> partial function?
+> 分派函数指的是，根据函数中参数的不同，使用不同的功能函数来处理，单分派：根据单一参数进行分派  
+> 用if-elif-else调用专门函数 -> 笨拙，耦合紧密，不利于模块扩展
+> 使用泛函数会使其看起来像override
+
+```python
+import functools
+from collections import abc;import numbers
+
+@functools.singledispatch # decorated by singledispatch will receive when don't match other register
+def displayObject(obj): print(obj, "is a base object")
+
+@displayObject.register(str) # register str type for displayObject, kinda like override
+def _(text): print(text, "is a str")
+
+@displayObject.register(numbers.Integral)
+def _(n): print(n, "is a integer")
+
+@displayObject.register(abc.MutableSequence)
+def _(seq): print(seq, "is a mutable sequence")
+
+displayObject((1,2)) # (1, 2) is a base object
+displayObject("hello") # hello is a str
+displayObject(123) # 123 is a integer
+displayObject([1,2]) # [1, 2] is a mutable sequence
+```
+
+### decorator with parameter
+
+> In conception filed, a decorator with parameter isa 'decorator factory' instead of a 'decorator'
+
+```python
+registory=set
+def register(active=True): # this is a decorator factory that returns a decorator
+    def regist(func):
+        if active: registory.add(func)
+        else: regist.discard(func)
+    return regist
+# if put: @register: register is a function, the decorator will be register
+# if put: @register(): register() will return a function, the decorator will be register.regist instead
+```
+
+## OOP utilities
+
+---
+
+### Object reference
+
+pass
+
+### Copy & deep copy
+
+copy.copy(obj)
+copy.deepcopy(obj)
+
+implement __copy__() and __deep_copy() to customize copy behavior
+
+### Do not use mutable variable as default parameter
+
+exp: HauntedBus
+
+### del
+
+> del will only delete refrence, not object. however, del may cause object been recycled if the refrence is the only remaining refrence.
+
+### weak refrence
+
+weak refrence will not be counted to refrenced number of a object.
+object be weak refrenced called 'refrent'
+
+> most used in cache
+
+```python
+import weakref
+s1="Hello World!"
+wref=weakref.ref(s1);print(wref) # Hello World!
+del s1; print(wref) # None
+```
+
+### WeakValueDictionary
+
+mutable mapping that value is weak refrence of objects
+
+> most used in cache
+
