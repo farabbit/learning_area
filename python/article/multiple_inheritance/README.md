@@ -1,4 +1,4 @@
-[Multiple Inheritance](./multiple_inheritance)
+[Multiple Inheritance](./multiple_inheritance.md)
 
 code
 
